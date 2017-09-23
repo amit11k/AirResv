@@ -1,0 +1,39 @@
+CREATE TABLE Users(
+username varchar2(20), 
+password varchar2(20), 
+role varchar2(10),
+mobile_no number(10)
+);
+
+CREATE TABLE Airport(
+AirportName varchar2(20), 
+Abbreviation varchar2(5),
+Location varchar2(40)
+);
+
+CREATE TABLE FlightInformation(
+flightno varchar2(5), 
+airline  varchar2(10), 
+dep_city varchar2(10), 
+arr_city varchar2(10), 
+dep_date date, 
+arr_date date, 
+dep_time NUMBER, 
+arr_time NUMBER, 
+FirstSeats number, 
+FirstSeatFare number(10,2), 
+BussSeats number, 
+BussSeatsFare number(10,2)
+);
+
+CREATE TABLE BookingInformation(
+Booking_id  varchar2(5), 
+cust_email varchar2(20), 
+no_of_passengers number, 
+class_type varchar2(10), 
+total_fare number(m,n), 
+seat_number number, 
+CreditCard_info varchar2(10), 
+src_city varchar2(10), 
+dest_city varchar2(10)
+);

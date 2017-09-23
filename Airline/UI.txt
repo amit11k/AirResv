@@ -1,0 +1,82 @@
+**********************************************
+	Airline Reservation System
+1. Enquiry
+2. Admin 
+3. Airline Executive
+4. Exit
+**********************************************
+Select your choice : 1
+1. New Enquiry
+2. Check Flight Status
+3. View Schedule
+4. Check Booking Status
+***********************************************
+Domestice/International : 			//New User
+From :
+To :
+Depart:
+Economic/Business:
+Childs:
+Adults:
+
+----------------------------------------------	
+Flight ID   Company   D_time A_Time Fare
+1.    	    Indigo----------------------------------
+2.      	----------------------------------------
+3.   		----------------------------------------
+**********************************************
+Do you want to Sort/Flight (Y/N)- // OPTIONAL
+**********************************************
+Do you want to continue(Y/N):Yes- Continue and No-Exit
+**********************************************
+Enter the Flight ID: 1
+**********************************************
+Are you an Existing User? (Y/N) :
+For No- 
+-------Registration---------------------------
+Enter your Email-ID:
+Enter your Phone No.:
+Enter your Password:
+Re-Enter your Password:
+//User name Optional
+----------------------------------------------
+For Yes-
+----------------------------------------------
+Enter your Username:
+Enter your Password:
+----------------------------------------------
+***********Booking****************************
+1. Add new Passenger
+2. Remove Passenger
+**********************************************
+PRINT BOOKING AND FLIGHT DETAILS
+Do you want to Proceed to Payment(Y/N):
+For Yes Proceed
+For No ROLLBACK!!
+**********************************************
+// Payment and Ticket - Not figured.
+
+
+
+Please select your Choice: 2 		// Admin
+Enter your username:
+Enter your Password:
+**********************************************
+1. Update/Manage Schedule		//?????????
+2. Update/Manage Information	//?????????
+3. View Bookings	//Easy 
+4. Passenger List	//Easy
+Please select your choice:
+***********************************************
+
+
+Please select your Choice: 3 		//Airline Executive
+Enter your Username:
+Enter your Password:
+_______________________________________________
+Enter Flight No.________
+View flight occupancy details ------
+
+
+
+

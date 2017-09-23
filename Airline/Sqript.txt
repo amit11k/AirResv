@@ -1,0 +1,26 @@
+CREATE TABLE comp_details
+(comp_id NUMBER PRIMARY KEY,
+comp_name VARCHAR2(20));
+
+INSERT INTO comp_details VALUES(99001,'Go Indigo');
+INSERT INTO comp_details VALUES(99002,'Air India');
+INSERT INTO comp_details VALUES(99003,'Jet Airways');
+INSERT INTO comp_details VALUES(99004,'SpiceJet');
+
+CREATE TABLE flight_list(
+flight_id NUMBER,
+source VARCHAR2(3),
+destination VARCHAR2(3),
+departure NUMBER,
+arrival NUMBER,
+duration NUMBER,
+stops NUMBER,
+price NUMBER,
+comp_id NUMBER,
+FOREIGN KEY(comp_id)
+REFERENCES comp_details(comp_id)
+);
+
+INSERT INTO flight_list VALUES(1001,'JAI','HYD',0600,0800,2,0,99001);
+INSERT INTO flight_list VALUES(1002,'HYD','BLR',1200,1400,2,0,99003);
+INSERT INTO flight_list VALUES(1003,'HYD','VNS',1300,1700,2,1,99004);

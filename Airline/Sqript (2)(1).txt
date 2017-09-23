@@ -1,0 +1,133 @@
+DROP TABLE Users;
+DROP TABLE Airport;
+DROP TABLE FlightInformation;
+DROP TABLE BookingInformation;
+DROP TABLE card_details;
+DROP TABLE flight_seats;
+DROP TABLE running_days;
+DROP SEQUENCE seat_seq ;
+DROP SEQUENCE book_id_seq ;
+
+CREATE TABLE Users(
+username varchar2(20), 
+password varchar2(20), 
+role varchar2(10),
+mobile_no number(10),
+emailid VARCHAR2(20)
+);
+
+INSERT INTO Users VALUES('amitk','12345','Admin',7860561611,'abc@xyz.com');
+
+CREATE TABLE Airport(
+AirportName varchar2(20), 
+Abbreviation varchar2(5),
+Location varchar2(40)
+);
+
+CREATE TABLE FlightInformation(
+flightno varchar2(5) PRIMARY KEY, 
+airline  varchar2(10), 
+dep_city varchar2(10), 
+arr_city varchar2(10), 
+dep_date date, 
+arr_date date, 
+dep_time NUMBER, 
+arr_time NUMBER, 
+duration NUMBER(5,2),
+stop NUMBER,
+stopDuration NUMBER,
+FirstSeats number, 
+FirstSeatFare number(10,2), 
+BussSeats number, 
+BussSeatsFare number(10,2)
+);
+
+CREATE TABLE BookingInformation(
+Booking_id  varchar2(5), 
+cust_email varchar2(20), 
+no_of_passengers number, 
+total_fare number(10,2), 
+seat_number number, 
+CreditCard_info varchar2(10), 
+src_city varchar2(10), 
+dest_city varchar2(10)
+);
+
+INSERT INTO FlightInformation
+VALUES('AI675','AirIndia','HYD','DEL','26-SEP-2017','26-SEP-2017',1800,2000,2,0,0,18,6000,150,4000);
+
+INSERT INTO FlightInformation
+VALUES('SP695','Spice Jet','MUM','DEL','06-AUG-2017','07-AUG-2017',2300,0130,2.5,1,0.5,15,8000,150,5000);
+
+INSERT INTO FlightInformation
+VALUES('ID565','Indigo','BLR','DEL','26-JUL-2017','26-JUL-2017',1300,1530,2.5,0,0,18,7500,145,3500);
+
+INSERT INTO FlightInformation
+VALUES('GI987','GoAir','MAA','CCU','12-NOV-2017','12-NOV-2017',0800,1015,2.25,0,0,14,8000,150,4700);
+
+INSERT INTO FlightInformation
+VALUES('AI678','JetAirways','CCU','DEL','06-DEC-2017','07-DEC-2017',0500,0700,2,0,0,18,6500,150,3500);
+
+
+CREATE SEQUENCE book_id_seq 
+START WITH 1000
+MINVALUE 1000
+MAXVALUE 99999
+INCREMENT BY 1;
+
+CREATE TABLE card_details(
+booking_id varchar2(5) PRIMARY KEY,
+cardNumber VARCHAR2(16),
+cvv NUMBER,
+expMonth NUMBER,
+expYear NUMBER,
+name VARCHAR2(20),
+mobNo VARCHAR2(10)
+);
+
+
+
+CREATE TABLE flight_seats(
+seat_number NUMBER PRIMARY KEY,
+flightno VARCHAR2(5),
+booking_id VARCHAR2(5),
+avail VARCHAR2(5),
+pass_fname VARCHAR2(20),
+pass_lname VARCHAR2(20),
+pass_age NUMBER,
+pass_gender VARCHAR2(10),
+class VARCHAR2(2),
+type VARCHAR2(10),
+FOREIGN KEY(flightno)
+REFERENCES FlightInformation(flightno)
+);
+
+CREATE SEQUENCE seat_seq MINVALUE 1
+MAXVALUE 100
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TABLE running_days(
+flightno VARCHAR2(5),
+mon NUMBER,
+tue NUMBER,
+wed NUMBER,
+thu NUMBER,
+fri NUMBER,
+sat NUMBER,
+sun NUMBER);
+
+INSERT INTO running_days VALUES('AI675',1,1,1,1,0,0,0);
+INSERT INTO running_days VALUES('SP695',1,0,1,0,1,0,1);
+INSERT INTO running_days VALUES('ID565',1,0,0,0,0,0,1);
+INSERT INTO running_days VALUES('GI987',1,1,1,1,1,1,1);
+INSERT INTO running_days VALUES('AI678',1,0,1,0,1,0,1);
+
+CREATE TABLE pass_list(
+flightno VARCHAR2(5),
+dateofjourney DATE,
+fname VARCHAR2(20),
+age VARCHAR2(20),
+lname VARCHAR2(20),
+gender VARCHAR2(10)
+);
