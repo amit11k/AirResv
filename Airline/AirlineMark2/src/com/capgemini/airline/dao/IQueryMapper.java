@@ -9,7 +9,10 @@ public class IQueryMapper {
 	public static String BOOKING_ID_QRY = "SELECT book_id_seq.CURRVAL FROM DUAL";
 	public static String USER_RETRIEVE_QRY = "SELECT password FROM Users WHERE username=";
 	public static String PASS_INSERT_QRY = "INSERT INTO pass_list VALUES(?,?,?,?,?,?)";
+	public static String DAY_RETRIEVE_QRY = "SELECT mon,tue,wed,thu,fri,sat,sun FROM running_days WHERE flightno=";
 	
 	public static String FLIGHT_INSERT_QRY = "INSERT INTO FlightInformation VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static String FLIGHT_ALL_QRY = "SELECT * FROM FlightInformation";
+	public static String PASS_RETRIEVE_QRY = "SELECT fname,lname,gender,age FROM pass_list";
+	public static String SCHEDULE_INSERT_QRY = "INSERT INTO air_schedule VALUES(?,?,NULL,?,NULL)";
 }

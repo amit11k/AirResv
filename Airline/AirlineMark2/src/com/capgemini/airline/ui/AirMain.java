@@ -125,6 +125,7 @@ public class AirMain {
 							// Print Ticket
 						}
 						else{
+							System.exit(0);
 							//Roll back to flight list
 						}
 					}
@@ -137,6 +138,10 @@ public class AirMain {
 				}
 			break;
 			case 2:
+				String flightno;
+				System.out.println("Enter the flight number mentioned in your e-ticket");
+				flightno = scanner.next();
+				
 				//Check flight status
 			break;
 			case 3:
@@ -182,10 +187,16 @@ public class AirMain {
 						}
 						break;
 					case 3:
+						//
 						break;
 					case 4:
-						break;
-					case 5:
+						//View Bookings
+						System.out.print("Enter the Flight ID: ");
+						String flightId = scanner.next();
+						List<Passenger> passList = new ArrayList<Passenger>();
+						passList = airService.retrievePassengers(flightId);
+						//Print Passengers
+						printPassenger(passList,flightId);
 						break;
 					}
 					flagAsk=false;
@@ -203,6 +214,29 @@ public class AirMain {
 		break;
 		case 3:
 			//Airline Executive
+			String userNameExec;
+			String passWordExec;
+			boolean flagAskExec=true;
+			do{
+			System.out.print("Username: ");
+			userNameExec = scanner.next();
+			System.out.print("Password: ");
+			passWordExec = scanner.next();
+			
+			try{
+				if(airService.verifyUser(userNameExec, passWordExec, "AExec")){
+					System.out.println("Welcome "+userNameExec);
+					System.out.print("Enter the Flight No. ");
+					String flightNo = scanner.next();
+					List<Passenger> passList = new ArrayList<>();
+					passList = airService.retrievePassengers(flightNo);
+					
+					System.out.print("Flight Occupancy: "+passList.size()+" out of 100 Seats");
+				}
+			}catch(AirlineException e){
+				System.out.println(e.getMessage());
+			}
+			}while(flagAskExec);
 		break;
 		case 4:
 			System.exit(0);
@@ -219,7 +253,7 @@ public class AirMain {
 		System.out.print("From: ");
 		enqry.setFrom(scanner.next());
 		System.out.print("To: ");
-		enqry.setTo(scanner.next());
+		enqry.setTo(scanner.next());           
 		System.out.print("Date of Journey(DD/MM/YYYY): ");
 		enqry.setDateOfJourney(convertDate(scanner.next()));
 		System.out.print("Economic/Business: ");
@@ -313,9 +347,6 @@ public class AirMain {
 		
 		return payBean;
 	}
-	public static PaymentBean payCredit(){
-		return null;
-	}
 	
 	public static void adminMenu(){
 		System.out.println("***********************");
@@ -323,7 +354,6 @@ public class AirMain {
 		System.out.println("2. View All Flights");
 		System.out.println("3. Change flight status");
 		System.out.println("4. View Bookings");
-		System.out.println("5. Passenger List");
 		System.out.println("***********************");
 	}
 	
@@ -362,6 +392,17 @@ public class AirMain {
 		flight.setBussSeatsFare(scanner.nextDouble());
 		System.out.println("****************************");
 		return flight;
+	}
+	public static void printPassenger(List<Passenger> passList,String flightId){
+		
+		System.out.println("************************");
+		System.out.println("Passenger in Flight :" +flightId);
+		Passenger pass = null;
+		for(int i=0;i<passList.size();i++){
+			pass = passList.get(i);
+			System.out.println((i+1)+". "+pass.getFirstName()+"\t"+
+			pass.getLastName()+"\t"+pass.getGender()+"\t"+pass.getAge());
+		}
 	}
 	public static LocalDate convertDate(String tempDate){
 		LocalDate lcdate = null;

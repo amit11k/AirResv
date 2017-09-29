@@ -7,6 +7,7 @@ import com.capgemini.airline.beans.FlightTab;
 import com.capgemini.airline.beans.NewUser;
 import com.capgemini.airline.beans.Passenger;
 import com.capgemini.airline.beans.PaymentBean;
+import com.capgemini.airline.beans.Schedule;
 import com.capgemini.airline.exception.AirlineException;
 
 public interface IAirlineDao {
@@ -17,4 +18,5 @@ public interface IAirlineDao {
 			List<Passenger> passList,PaymentBean payCard,double netPayment) 
 					throws AirlineException;
 	public String retrieveUser(String userName,String role) throws AirlineException;
+	Schedule scheduleCheck(String flightno) throws AirlineException;
 }

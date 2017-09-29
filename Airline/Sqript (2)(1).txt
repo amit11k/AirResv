@@ -5,6 +5,8 @@ DROP TABLE BookingInformation;
 DROP TABLE card_details;
 DROP TABLE flight_seats;
 DROP TABLE running_days;
+DROP TABLE air_schedule;
+DROP TABLE pass_list;
 DROP SEQUENCE seat_seq ;
 DROP SEQUENCE book_id_seq ;
 
@@ -29,8 +31,6 @@ flightno varchar2(5) PRIMARY KEY,
 airline  varchar2(10), 
 dep_city varchar2(10), 
 arr_city varchar2(10), 
-dep_date date, 
-arr_date date, 
 dep_time NUMBER, 
 arr_time NUMBER, 
 duration NUMBER(5,2),
@@ -54,19 +54,19 @@ dest_city varchar2(10)
 );
 
 INSERT INTO FlightInformation
-VALUES('AI675','AirIndia','HYD','DEL','26-SEP-2017','26-SEP-2017',1800,2000,2,0,0,18,6000,150,4000);
+VALUES('AI675','AirIndia','HYD','DEL',1800,2000,2,0,0,18,6000,150,4000);
 
 INSERT INTO FlightInformation
-VALUES('SP695','Spice Jet','MUM','DEL','06-AUG-2017','07-AUG-2017',2300,0130,2.5,1,0.5,15,8000,150,5000);
+VALUES('SP695','Spice Jet','MUM','DEL',2300,0130,2.5,1,0.5,15,8000,150,5000);
 
 INSERT INTO FlightInformation
-VALUES('ID565','Indigo','BLR','DEL','26-JUL-2017','26-JUL-2017',1300,1530,2.5,0,0,18,7500,145,3500);
+VALUES('ID565','Indigo','BLR','DEL',,1300,1530,2.5,0,0,18,7500,145,3500);
 
 INSERT INTO FlightInformation
-VALUES('GI987','GoAir','MAA','CCU','12-NOV-2017','12-NOV-2017',0800,1015,2.25,0,0,14,8000,150,4700);
+VALUES('GI987','GoAir','MAA','CCU',0800,1015,2.25,0,0,14,8000,150,4700);
 
 INSERT INTO FlightInformation
-VALUES('AI678','JetAirways','CCU','DEL','06-DEC-2017','07-DEC-2017',0500,0700,2,0,0,18,6500,150,3500);
+VALUES('AI678','JetAirways','CCU','DEL',0500,0700,2,0,0,18,6500,150,3500);
 
 
 CREATE SEQUENCE book_id_seq 
@@ -130,4 +130,14 @@ fname VARCHAR2(20),
 age VARCHAR2(20),
 lname VARCHAR2(20),
 gender VARCHAR2(10)
+);
+
+CREATE TABLE air_schedule{
+flightno VARCHAR2(5),
+old_dep_time NUMBER,
+new_dep_time NUMBER,
+old_arr_time NUMBER,
+new_arr_time NUMBER,
+FOREIGN KEY(flightno)
+REFERENCES FlightInformation(flightno)
 );

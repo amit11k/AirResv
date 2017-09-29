@@ -8,6 +8,7 @@ import com.capgemini.airline.beans.FlightTab;
 import com.capgemini.airline.beans.NewUser;
 import com.capgemini.airline.beans.Passenger;
 import com.capgemini.airline.beans.PaymentBean;
+import com.capgemini.airline.beans.Schedule;
 import com.capgemini.airline.dao.AdminAirlineDaoImpl;
 import com.capgemini.airline.dao.AirlineDaoImpl;
 import com.capgemini.airline.dao.IAdminAirlineDao;
@@ -58,5 +59,16 @@ public class AirlineServiceImpl implements IAirlineService {
 	@Override
 	public List<FlightBean> retrieveAllFlights() throws AirlineException {
 		return airAdminDao.retrieveAllFlights();
+	}
+
+	@Override
+	public List<Passenger> retrievePassengers(String flightId) throws AirlineException {
+		return airAdminDao.retrievePassengers(flightId);
+	}
+
+	@Override
+	public Schedule scheduleCheck(String flightno) throws AirlineException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

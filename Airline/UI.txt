@@ -11,7 +11,7 @@ Select your choice : 1
 3. View Schedule
 4. Check Booking Status
 ***********************************************
-Domestice/International : 			//New User
+Domestic/International : 			//New User
 From :
 To :
 Depart:

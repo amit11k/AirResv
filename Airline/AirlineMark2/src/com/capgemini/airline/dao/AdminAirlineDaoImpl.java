@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.capgemini.airline.beans.FlightBean;
+import com.capgemini.airline.beans.Passenger;
 import com.capgemini.airline.exception.AirlineException;
 import com.capgemini.airline.util.DBUtil;
 public class AdminAirlineDaoImpl implements IAdminAirlineDao {
@@ -43,6 +44,12 @@ public class AdminAirlineDaoImpl implements IAdminAirlineDao {
 			
 			queryResult=preparedStatement.executeUpdate();
 	
+			preparedStatement=connection.prepareStatement(IQueryMapper.SCHEDULE_INSERT_QRY);
+			
+			preparedStatement.setString(1, flight.getFlightNo());
+			preparedStatement.setInt(2, flight.getDepTime());
+			preparedStatement.setInt(3, flight.getArrTime());
+			
 			if(queryResult==0)
 			{
 				//logger.error("Insertion failed ");
@@ -143,6 +150,59 @@ public class AdminAirlineDaoImpl implements IAdminAirlineDao {
 		else
 			return flightList;
 
+	}
+
+	@Override
+	public List<Passenger> retrievePassengers(String flightId) throws AirlineException {
+		Connection con=DBUtil.getDatabaseConnection();
+		int passCount = 0;
+		
+		PreparedStatement preparedStatement=null;
+		ResultSet resultset = null;
+		
+		List<Passenger> passList=new ArrayList<Passenger>();
+		try
+		{
+			preparedStatement=con.prepareStatement(IQueryMapper.PASS_RETRIEVE_QRY);
+			resultset=preparedStatement.executeQuery();
+			
+			while(resultset.next())
+			{	
+				Passenger pass=new Passenger();
+				pass.setFirstName(resultset.getString(1));
+				pass.setLastName(resultset.getString(2));
+				pass.setGender(resultset.getString(3));
+				pass.setAge(resultset.getInt(4));
+
+				passList.add(pass);
+				passCount++;
+			}			
+			
+		} catch (SQLException sqlException) {
+			//logger.error(sqlException.getMessage());
+			throw new AirlineException("Tehnical problem occured. Refer log");
+		}
+		
+		finally
+		{
+			try 
+			{
+				resultset.close();
+				preparedStatement.close();
+				con.close();
+			} 
+			catch (SQLException e) 
+			{
+				//logger.error(e.getMessage());
+				throw new AirlineException("Error in closing db connection");
+
+			}
+		}
+		
+		if( passCount == 0)
+			return null;
+		else
+			return passList;
 	}
 	
 }

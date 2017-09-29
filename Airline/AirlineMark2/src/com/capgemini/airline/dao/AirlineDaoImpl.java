@@ -14,6 +14,7 @@ import com.capgemini.airline.beans.FlightTab;
 import com.capgemini.airline.beans.NewUser;
 import com.capgemini.airline.beans.Passenger;
 import com.capgemini.airline.beans.PaymentBean;
+import com.capgemini.airline.beans.Schedule;
 import com.capgemini.airline.exception.AirlineException;
 import com.capgemini.airline.util.DBUtil;
 
@@ -24,13 +25,17 @@ public class AirlineDaoImpl implements IAirlineDao {
 	public List<FlightTab> getFlightDetails(EnquiryBean enqry) throws AirlineException {
 		Connection connection = null;
 		ResultSet resultSet = null;
+		ResultSet dayresultSet = null;
 		Statement statement = null;
+		Statement daystatement = null;
 		FlightTab flightTab = new FlightTab();
 		List<FlightTab> allFlights = new ArrayList<FlightTab>();
 		int flightCount=0;
+		int[] arrDays = new int[7];
 		try{
 			connection = DBUtil.getDatabaseConnection();
 			statement = connection.createStatement();
+			
 			java.sql.Date sqlDate = java.sql.Date.valueOf(enqry.getDateOfJourney());
 			if(enqry.getClassName().equals("F"))
 			resultSet = statement.executeQuery(IQueryMapper.FLIGHT_RETRIEVEF_QRY+"'"+enqry.getFrom()+"'");
@@ -45,6 +50,9 @@ public class AirlineDaoImpl implements IAirlineDao {
 				flightTab.setPrice(resultSet.getInt(6));
 				flightTab.setFlightId(resultSet.getString(7));
 				
+				dayresultSet = daystatement.executeQuery(IQueryMapper.DAY_RETRIEVE_QRY+flightTab.getFlightId());
+				int dayDOJ = enqry.getDateOfJourney().getDayOfMonth();
+				if(dayresultSet.getInt(dayDOJ)==1)
 				allFlights.add(flightTab);
 				flightCount++;
 			}
@@ -180,5 +188,11 @@ public class AirlineDaoImpl implements IAirlineDao {
 		}catch(SQLException e){
 			throw new AirlineException(e.getMessage());
 		}
+	}
+
+	@Override
+	public Schedule scheduleCheck(String flightno) throws AirlineException {
+		
+		return null;
 	}
 }

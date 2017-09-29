@@ -8,6 +8,7 @@ import com.capgemini.airline.beans.FlightTab;
 import com.capgemini.airline.beans.NewUser;
 import com.capgemini.airline.beans.Passenger;
 import com.capgemini.airline.beans.PaymentBean;
+import com.capgemini.airline.beans.Schedule;
 import com.capgemini.airline.exception.AirlineException;
 
 public interface IAirlineService {
@@ -21,4 +22,7 @@ public interface IAirlineService {
 	public boolean verifyUser(String userName,String passWord,String role) throws AirlineException;
 	int addFlight(FlightBean flight) throws AirlineException;
 	List<FlightBean> retrieveAllFlights() throws AirlineException;
+	List<Passenger> retrievePassengers(String flightId) throws AirlineException;
+	
+	Schedule scheduleCheck(String flightno) throws AirlineException;
 }
